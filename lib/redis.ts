@@ -1,4 +1,4 @@
-import {Entity, Schema, Client} from "redis-om";
+import {Client, Entity, Schema} from "redis-om";
 
 const client = new Client();
 
@@ -62,26 +62,26 @@ let gameSchema = new Schema(
     },
 )
 
-export async function createMovie(data) {
+export async function createMovie(data: any) {
     await connect();
     const repository = client.fetchRepository(movieSchema);
 
     const movie = repository.createEntity(data);
-    await repository.save(movie);
+    return await repository.save(movie);
 }
 
-export async function createBook(data) {
+export async function createBook(data: any) {
     await connect();
     const repository = client.fetchRepository(bookSchema);
 
     const book = repository.createEntity(data);
-    await repository.save(book);
+    return await repository.save(book);
 }
 
-export async function createGame(data) {
+export async function createGame(data: any) {
     await connect();
     const repository = client.fetchRepository(gameSchema);
 
     const game = repository.createEntity(data);
-    await repository.save(game);
+    return await repository.save(game);
 }
