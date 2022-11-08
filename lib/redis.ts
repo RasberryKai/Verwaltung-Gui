@@ -14,7 +14,7 @@ let movieSchema = new Schema(
     {
         name: {type: "string"},
         description: {type: "string"},
-        publishDate: {type: "number"},
+        publishDate: {type: "string"},
         category: {type: "string"},
         condition: {type: "number"},
         duration: {type: "number"},
@@ -52,7 +52,7 @@ let gameSchema = new Schema(
     {
         name: {type: "string"},
         description: {type: "string"},
-        publishDate: {type: "number"},
+        publishDate: {type: "string"},
         category: {type: "string"},
         condition: {type: "number"},
         publisher: {type: "string"},
