@@ -1,7 +1,6 @@
-export default function Home() {
-  return (
-      <div className={""}>
+import InteractionRow from "../components/interactionRow";
 
-      </div>
-  )
+export default function Home() {
+  // TODO add item list
+  return <InteractionRow />;
 }
