@@ -11,7 +11,18 @@ export default function App({ Component, pageProps }: AppProps) {
         colorScheme: "dark",
         fontFamily: "Inter, sans-serif",
         colors: {
-          orange: ["#ce6d35", "#ce6d35", "#ce6d35", "#ce6d35", "#ce6d35"],
+          orange: [
+            "#ce6d35",
+            "#ce6d35",
+            "#ce6d35",
+            "#ce6d35",
+            "#ce6d35",
+            "#ce6d35",
+            "#ce6d35",
+            "#ce6d35",
+            "#ce6d35",
+            "#ce6d35",
+          ],
         },
         primaryColor: "orange",
       }}
