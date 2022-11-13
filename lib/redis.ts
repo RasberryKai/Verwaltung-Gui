@@ -54,7 +54,6 @@ let gameSchema = new Schema(Game, {
   category: { type: "string" },
   condition: { type: "number" },
   publisher: { type: "string" },
-  developer: { type: "string" },
   platform: { type: "string" },
   ageRating: { type: "number" },
 });
