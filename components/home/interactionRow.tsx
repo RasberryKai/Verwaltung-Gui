@@ -1,12 +1,15 @@
 import { TextInput } from "@mantine/core";
 import { HiMagnifyingGlass } from "react-icons/hi2";
-import { colors } from "../constants/colors";
+import { colors } from "../../constants/colors";
+import TagSelection from "./tagSelection";
 
 export default function InteractionRow() {
   // TODO add tags
   return (
     <div className={"w-full h-16 flex flex-row items-center"}>
-      <div className={"w-1/2"}></div>
+      <div className={"w-1/2"}>
+        <TagSelection />
+      </div>
       <div className={"w-1/2 flex flex-row justify-end"}>
         <div className={"w-4/5"}>
           <TextInput

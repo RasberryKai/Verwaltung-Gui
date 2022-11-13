@@ -1,4 +1,4 @@
-import InteractionRow from "../components/interactionRow";
+import InteractionRow from "../components/home/interactionRow";
 
 export default function Home() {
   // TODO add item list
