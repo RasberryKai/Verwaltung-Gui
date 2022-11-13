@@ -3,12 +3,19 @@ import { HiMagnifyingGlass } from "react-icons/hi2";
 import { colors } from "../../constants/colors";
 import TagSelection from "./tagSelection";
 
-export default function InteractionRow() {
-  // TODO add tags
+export interface TagDrillingProps {
+  selectedTags: string[];
+  setSelectedTags: (tags: string[]) => void;
+}
+
+export default function InteractionRow(props: TagDrillingProps) {
   return (
     <div className={"w-full h-16 flex flex-row items-center"}>
       <div className={"w-1/2"}>
-        <TagSelection />
+        <TagSelection
+          selectedTags={props.selectedTags}
+          setSelectedTags={props.setSelectedTags}
+        />
       </div>
       <div className={"w-1/2 flex flex-row justify-end"}>
         <div className={"w-4/5"}>

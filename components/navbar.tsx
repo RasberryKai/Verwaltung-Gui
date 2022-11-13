@@ -26,7 +26,7 @@ export default function Navbar(props: any) {
     <div className={"w-full h-full flex flex-row"}>
       <nav
         className={
-          "w-1/12 h-screen bg-secondary grid grid-rows-3 pt-12 pr-2 pl-2"
+          "w-1/12 h-screen bg-primary grid grid-rows-3 pt-12 pr-2 pl-2"
         }
       >
         <a href={home} onClick={onHomeClick}>

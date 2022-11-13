@@ -1,38 +1,42 @@
 import Tag from "./tag";
-import { useState } from "react";
+import { TagDrillingProps } from "./interactionRow";
 
-export default function TagSelection() {
-  const [selectedTags, setSelectedTags] = useState<string[]>([]);
-
+export default function TagSelection(props: TagDrillingProps) {
   return (
-    <div className={"w-11/12 grid grid-cols-3"}>
+    <div className={"w-9/12 grid grid-cols-3"}>
       <Tag
         onClick={() => {
-          if (selectedTags.includes("Books"))
-            setSelectedTags(selectedTags.filter((tag) => tag !== "Books"));
-          else setSelectedTags([...selectedTags, "Books"]);
+          if (props.selectedTags.includes("Books"))
+            props.setSelectedTags(
+              props.selectedTags.filter((tag) => tag !== "Books")
+            );
+          else props.setSelectedTags([...props.selectedTags, "Books"]);
         }}
-        isSelected={selectedTags.includes("Books")}
+        isSelected={props.selectedTags.includes("Books")}
       >
         Books
       </Tag>
       <Tag
         onClick={() => {
-          if (selectedTags.includes("Games"))
-            setSelectedTags(selectedTags.filter((tag) => tag !== "Games"));
-          else setSelectedTags([...selectedTags, "Games"]);
+          if (props.selectedTags.includes("Games"))
+            props.setSelectedTags(
+              props.selectedTags.filter((tag) => tag !== "Games")
+            );
+          else props.setSelectedTags([...props.selectedTags, "Games"]);
         }}
-        isSelected={selectedTags.includes("Games")}
+        isSelected={props.selectedTags.includes("Games")}
       >
         Games
       </Tag>
       <Tag
         onClick={() => {
-          if (selectedTags.includes("Movies"))
-            setSelectedTags(selectedTags.filter((tag) => tag !== "Movies"));
-          else setSelectedTags([...selectedTags, "Movies"]);
+          if (props.selectedTags.includes("Movies"))
+            props.setSelectedTags(
+              props.selectedTags.filter((tag) => tag !== "Movies")
+            );
+          else props.setSelectedTags([...props.selectedTags, "Movies"]);
         }}
-        isSelected={selectedTags.includes("Movies")}
+        isSelected={props.selectedTags.includes("Movies")}
       >
         Movies
       </Tag>
