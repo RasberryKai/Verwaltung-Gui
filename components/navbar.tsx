@@ -26,7 +26,7 @@ export default function Navbar(props: any) {
     <div className={"w-screen h-screen flex flex-row"}>
       <nav
         className={
-          "w-1/12 h-screen bg-primary grid grid-rows-3 pt-12 pr-2 pl-2"
+          "w-1/12 h-screen bg-primary flex flex-col justify-around pr-2 pl-2"
         }
       >
         <a href={home} onClick={onHomeClick}>
@@ -39,7 +39,7 @@ export default function Navbar(props: any) {
           <Image
             src={require("../public/options.png")}
             alt={"settings"}
-            className={"pr-2 pl-2"}
+            className={"scale-95"}
           />
         </a>
       </nav>
