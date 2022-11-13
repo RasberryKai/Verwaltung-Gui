@@ -6,31 +6,37 @@ export default function TagSelection(props: TagDrillingProps) {
     <div className={"w-10/12 grid grid-cols-3"}>
       <Tag
         onClick={() => {
-          if (props.filters.includes("Books"))
-            props.setFilters(props.filters.filter((tag) => tag !== "Books"));
-          else props.setFilters([...props.filters, "Books"]);
+          if (props.filter === "Books") {
+            props.setFilter(null);
+            return;
+          }
+          props.setFilter("Books");
         }}
-        isSelected={props.filters.includes("Books")}
+        isSelected={props.filter === "Books"}
       >
         Books
       </Tag>
       <Tag
         onClick={() => {
-          if (props.filters.includes("Games"))
-            props.setFilters(props.filters.filter((tag) => tag !== "Games"));
-          else props.setFilters([...props.filters, "Games"]);
+          if (props.filter === "Games") {
+            props.setFilter(null);
+            return;
+          }
+          props.setFilter("Games");
         }}
-        isSelected={props.filters.includes("Games")}
+        isSelected={props.filter === "Games"}
       >
         Games
       </Tag>
       <Tag
         onClick={() => {
-          if (props.filters.includes("Movies"))
-            props.setFilters(props.filters.filter((tag) => tag !== "Movies"));
-          else props.setFilters([...props.filters, "Movies"]);
+          if (props.filter === "Movies") {
+            props.setFilter(null);
+            return;
+          }
+          props.setFilter("Movies");
         }}
-        isSelected={props.filters.includes("Movies")}
+        isSelected={props.filter === "Movies"}
       >
         Movies
       </Tag>

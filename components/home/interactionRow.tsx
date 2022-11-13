@@ -4,15 +4,15 @@ import { colors } from "../../constants/colors";
 import TagSelection from "./tagSelection";
 
 export interface TagDrillingProps {
-  filters: string[];
-  setFilters: (tags: string[]) => void;
+  filter: string | null;
+  setFilter: (tags: string | null) => void;
 }
 
 export default function InteractionRow(props: TagDrillingProps) {
   return (
     <div className={"w-full h-16 flex flex-row items-center"}>
       <div className={"w-1/2"}>
-        <TagSelection filters={props.filters} setFilters={props.setFilters} />
+        <TagSelection filter={props.filter} setFilter={props.setFilter} />
       </div>
       <div className={"w-1/2 flex flex-row justify-end"}>
         <div className={"w-4/5"}>
