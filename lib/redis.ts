@@ -62,6 +62,7 @@ let gameSchema = new Schema(Game, {
 export async function createMovie(data: any) {
   await connect();
   const repository = client.fetchRepository(movieSchema);
+  await repository.createIndex();
 
   const movie = repository.createEntity(data);
   return await repository.save(movie);
@@ -70,6 +71,7 @@ export async function createMovie(data: any) {
 export async function createBook(data: any) {
   await connect();
   const repository = client.fetchRepository(bookSchema);
+  await repository.createIndex();
 
   const book = repository.createEntity(data);
   return await repository.save(book);
@@ -78,9 +80,34 @@ export async function createBook(data: any) {
 export async function createGame(data: any) {
   await connect();
   const repository = client.fetchRepository(gameSchema);
+  await repository.createIndex();
 
   const game = repository.createEntity(data);
   return await repository.save(game);
+}
+
+export async function getMovies() {
+  await connect();
+  const repository = client.fetchRepository(movieSchema);
+  await repository.createIndex();
+
+  return repository.search().return.all();
+}
+
+export async function getBooks() {
+  await connect();
+  const repository = client.fetchRepository(bookSchema);
+  await repository.createIndex();
+
+  return repository.search().return.all();
+}
+
+export async function getGames() {
+  await connect();
+  const repository = client.fetchRepository(gameSchema);
+  await repository.createIndex();
+
+  return repository.search().return.all();
 }
 
 // TODO create methods for receiving all items

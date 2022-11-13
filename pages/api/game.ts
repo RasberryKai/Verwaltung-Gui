@@ -1,4 +1,4 @@
-import { createGame } from "../../lib/redis";
+import { createGame, getGames } from "../../lib/redis";
 import { NextApiRequest, NextApiResponse } from "next";
 
 export default async function handler(
@@ -10,6 +10,10 @@ export default async function handler(
     case "PUT":
       const id = await createGame(req.body);
       res.status(201).json({ id });
+      break;
+    case "GET":
+      const games = await getGames();
+      res.status(200).json({ message: games });
       break;
     default:
       res.status(405).send("Method not allowed");

@@ -1,7 +1,6 @@
 import { NextApiRequest, NextApiResponse } from "next";
-import { createMovie } from "../../lib/redis";
+import { createMovie, getMovies } from "../../lib/redis";
 
-// TODO create dynamic routes for book, movie, and game
 export default async function handler(
   req: NextApiRequest,
   res: NextApiResponse
@@ -13,8 +12,8 @@ export default async function handler(
       res.status(201).json({ id });
       break;
     case "GET":
-      // TODO: receive all items
-      res.status(200).json({ message: "GET" });
+      const movies = await getMovies();
+      res.status(200).json({ message: movies });
       break;
     default:
       res.status(405).send("Method not allowed");
