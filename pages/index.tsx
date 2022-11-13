@@ -9,7 +9,7 @@ export default function Home() {
   return (
     <div className={"h-screen"}>
       <InteractionRow filter={filters} setFilter={setFilters} />
-      <ItemCanvas className={"inline-grid w-full h-4/5 mt-16"}>
+      <ItemCanvas className={"inline-grid w-full h-4/5 mt-12"}>
         <ItemDisplay filter={filters} setFilter={setFilters} />
       </ItemCanvas>
     </div>
