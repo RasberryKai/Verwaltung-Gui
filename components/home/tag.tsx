@@ -1,12 +1,12 @@
 export default function Tag(props: any) {
   return (
     <button
-      className={`bg-primary rounded-3xl h-10 w-40 ${
-        props.isSelected ? "border-2 border-white" : ""
+      className={`rounded-2xl h-10 w-40 ${
+        props.isSelected ? "bg-white" : "bg-primary"
       }`}
       onClick={props.onClick}
     >
-      <p className={"text-orange-500"}>{props.children}</p>
+      <p className={"text-orange"}>{props.children}</p>
     </button>
   );
 }

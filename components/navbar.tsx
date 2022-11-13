@@ -23,7 +23,7 @@ export default function Navbar(props: any) {
   };
 
   return (
-    <div className={"w-full h-full flex flex-row"}>
+    <div className={"w-screen h-screen flex flex-row"}>
       <nav
         className={
           "w-1/12 h-screen bg-primary grid grid-rows-3 pt-12 pr-2 pl-2"

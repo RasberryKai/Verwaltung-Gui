@@ -3,7 +3,7 @@ import { TagDrillingProps } from "./interactionRow";
 
 export default function TagSelection(props: TagDrillingProps) {
   return (
-    <div className={"w-9/12 grid grid-cols-3"}>
+    <div className={"w-10/12 grid grid-cols-3"}>
       <Tag
         onClick={() => {
           if (props.filters.includes("Books"))

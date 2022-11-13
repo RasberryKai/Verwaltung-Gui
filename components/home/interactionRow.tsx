@@ -25,6 +25,7 @@ export default function InteractionRow(props: TagDrillingProps) {
                 className={"mr-2"}
               />
             }
+            radius="md"
             className={"w-full"}
             size={"lg"}
           />
