@@ -1,6 +1,7 @@
 import InteractionRow from "../components/home/interactionRow";
 import { useState } from "react";
-import ItemDisplay from "../components/home/itemDisplay";
+import ItemDisplay from "../components/items/itemDisplay";
+import ItemCanvas from "../components/items/ItemCanvas";
 
 export default function Home() {
   const [filters, setFilters] = useState<string[]>([]);
@@ -8,11 +9,9 @@ export default function Home() {
   return (
     <div className={"h-screen"}>
       <InteractionRow filters={filters} setFilters={setFilters} />
-      <ItemDisplay
-        filters={filters}
-        setFilters={setFilters}
-        className={"inline-grid w-full h-4/5 mt-16"}
-      />
+      <ItemCanvas className={"inline-grid w-full h-4/5 mt-16"}>
+        <ItemDisplay filters={filters} setFilters={setFilters} />
+      </ItemCanvas>
     </div>
   );
 }
