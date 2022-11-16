@@ -1,7 +1,7 @@
 import { TagDrillingProps } from "../home/interactionRow";
 import { fetcher } from "../../lib/Axios";
 import useSWR from "swr";
-import MovieCard from "./movieCard";
+import Card from "./card";
 
 interface ItemDisplayProps extends TagDrillingProps {
   className?: string;
@@ -15,19 +15,16 @@ export default function ItemDisplay(props: ItemDisplayProps) {
   // if (!data) return <div>Loading...</div>;
 
   return (
-    <div className={"p-6"}>
-      <MovieCard
-        movie={{
+    <div className={"p-4"}>
+      <Card
+        medium={{
+          id: "test",
           name: "test",
-          description:
-            "lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam, quod.fj oapsjdfoiapsjfopiasjfodpi sajf oisadjfoi asjfoisa jdfouasj dfoiajwdofpi jasoifj.",
-          publishDate: "20.01.2006",
-          category: "action",
+          description: "lorem ipsum",
+          publishDate: "20.10.2021",
+          category: "movie",
+          available: true,
           condition: 1,
-          duration: 100000,
-          ageRating: 18,
-          blockbuster: true,
-          regisseur: "test",
         }}
       />
     </div>
