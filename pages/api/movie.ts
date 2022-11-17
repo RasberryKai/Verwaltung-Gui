@@ -13,7 +13,7 @@ export default async function handler(
       break;
     case "GET":
       const movies = await getMovies();
-      res.status(200).json({ message: movies });
+      res.status(200).json({ movies });
       break;
     default:
       res.status(405).send("Method not allowed");

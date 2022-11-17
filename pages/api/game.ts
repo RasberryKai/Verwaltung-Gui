@@ -13,7 +13,7 @@ export default async function handler(
       break;
     case "GET":
       const games = await getGames();
-      res.status(200).json({ message: games });
+      res.status(200).json({ games });
       break;
     default:
       res.status(405).send("Method not allowed");
