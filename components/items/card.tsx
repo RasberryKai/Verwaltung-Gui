@@ -1,7 +1,5 @@
 import { Medium } from "../../utils/Models";
 import { useRouter } from "next/router";
-import { useState } from "react";
-import Image from "next/image";
 
 interface CardProps {
     medium: Medium;
@@ -40,7 +38,6 @@ const getConditionColor = (condition: number) => {
 export default function Card(props: CardProps) {
     const data = props.medium;
     const router = useRouter();
-    const [isHovered, setIsHovered] = useState(false);
 
     const onCardClick = (e: any) => {
         e.preventDefault();
@@ -49,52 +46,28 @@ export default function Card(props: CardProps) {
 
     return (
         <button className={"w-full h-18"} onClick={onCardClick}>
-            {/* Main Container */}
             <div
                 className={
-                    "w-full h-full bg-primary rounded-lg flex flex-row justify-between p-2"
+                    "w-full h-full bg-primary rounded-lg flex flex-col justify-between p-2"
                 }
-                onMouseEnter={() => setIsHovered(true)}
-                onMouseLeave={() => setIsHovered(false)}
             >
-                {/* Left Container */}
-                <div className={"flex flex-col justify-between items-start"}>
+                <div className={"flex flex-row justify-between items-center"}>
                     <p className={"text-white text-2xl font-bold"}>
                         {data.name}
                     </p>
-                    <p className={"text-white"}>{data.category}</p>
+                    <p className={data.available ? "text-green" : "text-red"}>
+                        {data.available ? "Available" : "Borrowed"}
+                    </p>
                 </div>
-                {/* Right Container */}
-                <div className={"flex flex-row"}>
-                    {/* Info Container */}
-                    <div
-                        className={
-                            "h-full flex flex-col justify-between items-end"
-                        }
+                <div className={"flex flex-row justify-between items-center"}>
+                    <p className={"text-white"}>{data.category}</p>
+                    <p
+                        className={`text-base ${getConditionColor(
+                            data.condition
+                        )}`}
                     >
-                        <p
-                            className={
-                                data.available ? "text-green" : "text-red"
-                            }
-                        >
-                            {data.available ? "Available" : "Borrowed"}
-                        </p>
-                        <p
-                            className={`text-base ${getConditionColor(
-                                data.condition
-                            )}`}
-                        >
-                            {getCondition(data.condition)}
-                        </p>
-                    </div>
-                    <div className={`ml-4 ${isHovered ? "" : "hidden"}`}>
-                        <Image
-                            src={require("../../public/delete.png")}
-                            alt={"Delete"}
-                            className={"h-14 w-auto scale-100"}
-                            onClick={() => console.log("delete")}
-                        />
-                    </div>
+                        {getCondition(data.condition)}
+                    </p>
                 </div>
             </div>
         </button>
