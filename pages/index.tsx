@@ -4,14 +4,14 @@ import ItemDisplay from "../components/items/itemDisplay";
 import ItemCanvas from "../components/items/ItemCanvas";
 
 export default function Home() {
-  const [filters, setFilters] = useState<string | null>(null);
+    const [filters, setFilters] = useState<string | null>(null);
 
-  return (
-    <div className={"h-screen"}>
-      <InteractionRow filter={filters} setFilter={setFilters} />
-      <ItemCanvas className={"inline-grid w-full h-4/5 mt-12"}>
-        <ItemDisplay filter={filters} setFilter={setFilters} />
-      </ItemCanvas>
-    </div>
-  );
+    return (
+        <div className={"h-screen"}>
+            <InteractionRow filter={filters} setFilter={setFilters} />
+            <ItemCanvas className={"inline-grid w-full h-4/5 mt-12"}>
+                <ItemDisplay filter={filters} setFilter={setFilters} />
+            </ItemCanvas>
+        </div>
+    );
 }

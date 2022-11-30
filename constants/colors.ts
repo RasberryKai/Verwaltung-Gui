@@ -1,3 +1,3 @@
 export const colors = {
-  ORANGE: "#e27536",
+    ORANGE: "#e27536",
 };
