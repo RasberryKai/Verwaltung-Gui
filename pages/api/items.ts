@@ -8,5 +8,9 @@ export default async function handler(
     const movies = await getMovies();
     const games = await getGames();
     const books = await getBooks();
-    return res.status(200).json([...movies, ...games, ...books]);
+    return res.status(200).json({
+        movies: movies,
+        games: games,
+        books: books,
+    });
 }

@@ -15,14 +15,6 @@ export interface Movie extends Medium {
     regisseur: string;
 }
 
-/*
-1. name
-2. (publish Date)
-3. Category
-4. condition
-5. available
- */
-
 export interface Book extends Medium {
     publisher: string;
     author: string;
