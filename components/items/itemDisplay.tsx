@@ -4,6 +4,7 @@ import useSWR from "swr";
 import Card from "./card";
 import LoadError from "./error";
 import { Medium } from "../../utils/Models";
+import CircleLoad from "../loaders/CircleLoad";
 
 interface ItemDisplayProps extends TagDrillingProps {
     className?: string;
@@ -13,7 +14,7 @@ export default function ItemDisplay(props: ItemDisplayProps) {
     const { data, error } = useSWR("/api/items", fetcher);
 
     if (error) return <LoadError />;
-    if (!data) return <div>Loading...</div>;
+    if (!data) return <CircleLoad />;
 
     return (
         <div className={`p-4 ${props.className}`}>
