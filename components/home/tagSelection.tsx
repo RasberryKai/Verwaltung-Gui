@@ -3,11 +3,16 @@ import { TagDrillingProps } from "./interactionRow";
 
 interface TagSelectionProps extends TagDrillingProps {
     className?: string;
+    tagNames?: {
+        first?: string;
+        second?: string;
+        third?: string;
+    };
 }
 
 export default function TagSelection(props: TagSelectionProps) {
     return (
-        <div className={`grid grid-cols-3 ${props.className} w-10/12`}>
+        <div className={`flex flex-row justify-between ${props.className} w-10/12`}>
             <Tag
                 onClick={() => {
                     if (props.filter === "Books") {
@@ -18,7 +23,7 @@ export default function TagSelection(props: TagSelectionProps) {
                 }}
                 isSelected={props.filter === "Books"}
             >
-                Books
+                {props.tagNames?.first ?? "Books"}
             </Tag>
             <Tag
                 onClick={() => {
@@ -30,7 +35,7 @@ export default function TagSelection(props: TagSelectionProps) {
                 }}
                 isSelected={props.filter === "Games"}
             >
-                Games
+                {props.tagNames?.second ?? "Games"}
             </Tag>
             <Tag
                 onClick={() => {
@@ -42,7 +47,7 @@ export default function TagSelection(props: TagSelectionProps) {
                 }}
                 isSelected={props.filter === "Movies"}
             >
-                Movies
+                {props.tagNames?.third ?? "Movies"}
             </Tag>
         </div>
     );
