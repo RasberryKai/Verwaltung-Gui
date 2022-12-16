@@ -27,9 +27,3 @@ export interface Game extends Medium {
     platform: string;
     ageRating: number;
 }
-
-export interface Cd extends Medium {
-    publisher: string;
-    artist: string;
-    duration: number;
-}

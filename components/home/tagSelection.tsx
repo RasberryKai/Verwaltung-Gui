@@ -1,9 +1,13 @@
 import Tag from "./tag";
 import { TagDrillingProps } from "./interactionRow";
 
-export default function TagSelection(props: TagDrillingProps) {
+interface TagSelectionProps extends TagDrillingProps {
+    className?: string;
+}
+
+export default function TagSelection(props: TagSelectionProps) {
     return (
-        <div className={"w-10/12 grid grid-cols-3"}>
+        <div className={`grid grid-cols-3 ${props.className} w-10/12`}>
             <Tag
                 onClick={() => {
                     if (props.filter === "Books") {
