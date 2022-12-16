@@ -4,22 +4,16 @@ import { useForm } from "@mantine/form";
 import BookForm from "../components/add/BookForm";
 import GameForm from "../components/add/GameForm";
 import MovieForm from "../components/add/MovieForm";
-import {
-    Autocomplete,
-    Select,
-    Switch,
-    TextInput,
-    useMantineTheme,
-} from "@mantine/core";
+import { Autocomplete, MultiSelect, Select, Switch, TextInput, useMantineTheme } from "@mantine/core";
 import { DatePicker } from "@mantine/dates";
-import theme from "tailwindcss/defaultTheme";
 import { IconCheck, IconX } from "@tabler/icons";
+import DefaultForm from "../components/add/DefaultForm";
 
 export default function Add() {
     const [type, setType] = useState<string | null>(null);
     const [checked, setChecked] = useState<boolean>(true);
     const theme = useMantineTheme();
-    const form = useForm({
+    const defaultForm = useForm({
         initialValues: {
             name: "",
             description: "",
@@ -33,8 +27,6 @@ export default function Add() {
             condition: 0,
         },
     });
-
-    const handleSubmit = (values: any) => {};
 
     const formToRender = () => {
         if (type === "Books") {
@@ -50,76 +42,15 @@ export default function Add() {
 
     return (
         <div className={"w-full h-full"}>
-            <div className={"flex flex-row justify-between"}>
-                <TagSelection
-                    className={"w-full"}
-                    filter={type}
-                    setFilter={setType}
-                />
-                <div className={"w-1/2"}></div>
+            <div className={"flex flex-row justify-end "}>
+                <div className={"w-2/3 flex flex-row justify-end"}>
+                    <TagSelection filter={type} setFilter={setType} />
+                </div>
             </div>
             <div>
-                <form
-                    onSubmit={form.onSubmit((values) => handleSubmit(values))}
-                >
-                    <TextInput
-                        withAsterisk
-                        label={"Name"}
-                        placeholder={"Herr der Ringe"}
-                    />
-                    <TextInput
-                        withAsterisk
-                        label={"description"}
-                        placeholder={"Ein Buch über Ringe"}
-                    />
-                    <DatePicker
-                        label={"Publish Date"}
-                        withAsterisk
-                        placeholder={"20.01.2004"}
-                    />
-                    <Autocomplete
-                        label={"Category"}
-                        withAsterisk
-                        placeholder={"Fantasy"}
-                        data={["Fantasy", "Sci-Fi"]}
-                    />
-                    <Switch
-                        checked={checked}
-                        onChange={(event) =>
-                            setChecked(event.currentTarget.checked)
-                        }
-                        color="teal"
-                        size="md"
-                        label="Available"
-                        thumbIcon={
-                            checked ? (
-                                <IconCheck
-                                    size={12}
-                                    color={
-                                        theme.colors.teal[
-                                            theme.fn.primaryShade()
-                                        ]
-                                    }
-                                    stroke={3}
-                                />
-                            ) : (
-                                <IconX
-                                    size={12}
-                                    color={
-                                        theme.colors.red[
-                                            theme.fn.primaryShade()
-                                        ]
-                                    }
-                                    stroke={3}
-                                />
-                            )
-                        }
-                    />
-                    {/* Condition */}
-                    <Select data={[]} />
-                </form>
+                <DefaultForm form={defaultForm} />
+                {formToRender()}
             </div>
-            {formToRender()}
         </div>
     );
 }
