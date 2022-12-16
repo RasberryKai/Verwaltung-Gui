@@ -12,7 +12,7 @@ export default function GameForm() {
     });
     return (
         <div>
-            <p>GameForm</p>
+            <p className={"text-orange"}>GameForm</p>
         </div>
     );
 }

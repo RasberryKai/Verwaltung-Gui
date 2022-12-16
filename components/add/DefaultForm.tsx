@@ -1,4 +1,4 @@
-import { Autocomplete, MultiSelect, Select, Switch, TextInput, useMantineTheme } from "@mantine/core";
+import { MultiSelect, Select, Switch, TextInput, useMantineTheme } from "@mantine/core";
 import { DatePicker } from "@mantine/dates";
 import { IconCheck, IconX } from "@tabler/icons";
 import { useState } from "react";
@@ -18,7 +18,7 @@ export default function DefaultForm(props: DefaultFormProps) {
             onSubmit={props.form.onSubmit((values: any) => handleSubmit(values))}
         >
             <TextInput size={"md"} withAsterisk label={"Name"} placeholder={"Herr der Ringe"} />
-            <TextInput size={"md"} withAsterisk label={"description"} placeholder={"Ein Buch über Ringe"} />
+            <TextInput size={"md"} withAsterisk label={"Description"} placeholder={"Ein Buch über Ringe"} />
             <DatePicker size={"md"} label={"Publish Date"} withAsterisk placeholder={"20.01.2004"} />
             <MultiSelect
                 size={"md"}

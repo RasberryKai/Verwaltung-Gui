@@ -17,7 +17,7 @@ export default function BookForm() {
     });
     return (
         <div>
-            <p>BookForm</p>
+            <p className={"text-orange"}>BookForm</p>
         </div>
     );
 }

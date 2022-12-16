@@ -4,9 +4,6 @@ import { useForm } from "@mantine/form";
 import BookForm from "../components/add/BookForm";
 import GameForm from "../components/add/GameForm";
 import MovieForm from "../components/add/MovieForm";
-import { Autocomplete, MultiSelect, Select, Switch, TextInput, useMantineTheme } from "@mantine/core";
-import { DatePicker } from "@mantine/dates";
-import { IconCheck, IconX } from "@tabler/icons";
 import DefaultForm from "../components/add/DefaultForm";
 import SplitForm from "../components/add/SplitForm";
 
@@ -38,7 +35,7 @@ export default function Add() {
             return <MovieForm />;
         } else {
             // TODO: Add Select for type info
-            return <div>Nothing</div>;
+            return <div className={"text-orange"}>Nothing</div>;
         }
     };
 

@@ -13,7 +13,7 @@ export default function MovieForm() {
     });
     return (
         <div>
-            <p>MovieForm</p>
+            <p className={"text-orange"}>MovieForm</p>
         </div>
     );
 }
