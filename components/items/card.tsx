@@ -3,6 +3,7 @@ import { useRouter } from "next/router";
 
 interface CardProps {
     medium: Medium;
+    className?: string;
 }
 
 const getCondition = (condition: number) => {
@@ -45,29 +46,17 @@ export default function Card(props: CardProps) {
     };
 
     return (
-        <button className={"w-full h-18"} onClick={onCardClick}>
-            <div
-                className={
-                    "w-full h-full bg-primary rounded-lg flex flex-col justify-between p-2"
-                }
-            >
+        <button className={`w-full h-18 ${props.className}`} onClick={onCardClick}>
+            <div className={"w-full h-full bg-primary rounded-lg flex flex-col justify-between p-2"}>
                 <div className={"flex flex-row justify-between items-center"}>
-                    <p className={"text-white text-2xl font-bold"}>
-                        {data.name}
-                    </p>
+                    <p className={"text-white text-2xl font-bold"}>{data.name}</p>
                     <p className={data.available ? "text-green" : "text-red"}>
                         {data.available ? "Available" : "Borrowed"}
                     </p>
                 </div>
                 <div className={"flex flex-row justify-between items-center"}>
                     <p className={"text-white"}>{data.category}</p>
-                    <p
-                        className={`text-base ${getConditionColor(
-                            data.condition
-                        )}`}
-                    >
-                        {getCondition(data.condition)}
-                    </p>
+                    <p className={`text-base ${getConditionColor(data.condition)}`}>{getCondition(data.condition)}</p>
                 </div>
             </div>
         </button>

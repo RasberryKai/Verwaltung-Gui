@@ -33,6 +33,7 @@ export default function ItemDisplay(props: ItemDisplayProps) {
                                     available: item.available,
                                     condition: item.condition,
                                 }}
+                                className={"animate-fade"}
                             />
                             <div className={"mb-2"} />
                         </>
@@ -53,6 +54,7 @@ export default function ItemDisplay(props: ItemDisplayProps) {
                                     available: item.available,
                                     condition: item.condition,
                                 }}
+                                className={"animate-fade"}
                             />
                             <div className={"mb-2"} />
                         </>
@@ -73,6 +75,7 @@ export default function ItemDisplay(props: ItemDisplayProps) {
                                     available: item.available,
                                     condition: item.condition,
                                 }}
+                                className={"animate-fade"}
                             />
                             <div className={"mb-2"} />
                         </>
