@@ -120,6 +120,26 @@ export default function Add() {
             ageRating: 0,
             // toggle
             blockbuster: false,
+            regisseur: "",
+        },
+        validate: {
+            duration: (value) => {
+                if (value < 0) return "Duration must be greater than 0";
+                console.log(JSON.stringify(value));
+            },
+            ageRating: (value) => {
+                if (value < 0) return "Age rating must be greater than 0";
+                if (value !== 6 && value !== 12 && value !== 16 && value !== 18)
+                    return "Age rating must be 6, 12, 16 or 18";
+            },
+            blockbuster: (value: any) => {
+                if (typeof value !== "boolean") return "Blockbuster must be a boolean";
+            },
+            regisseur: (value) => {
+                if (!value) {
+                    return "Regisseur is required";
+                }
+            },
         },
     });
 
@@ -198,6 +218,7 @@ export default function Add() {
                             if (result.hasErrors) return;
                             setActive(2);
                             // if successful timeout and redirect
+                            // TODO: Create item in database
                             setTimeout(() => {
                                 router.push("/");
                             }, 600);
