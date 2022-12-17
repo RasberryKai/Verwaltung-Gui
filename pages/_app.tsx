@@ -4,6 +4,7 @@ import Navbar from "../components/navbar";
 import { MantineProvider } from "@mantine/core";
 import AlignMid from "../components/common/alignMid";
 import { useEffect } from "react";
+import { NotificationsProvider } from "@mantine/notifications";
 
 export default function App({ Component, pageProps }: AppProps) {
     useEffect(() => {
@@ -32,11 +33,13 @@ export default function App({ Component, pageProps }: AppProps) {
                 primaryColor: "orange",
             }}
         >
-            <Navbar>
-                <AlignMid>
-                    <Component {...pageProps} />
-                </AlignMid>
-            </Navbar>
+            <NotificationsProvider>
+                <Navbar>
+                    <AlignMid>
+                        <Component {...pageProps} />
+                    </AlignMid>
+                </Navbar>
+            </NotificationsProvider>
         </MantineProvider>
     );
 }

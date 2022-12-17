@@ -1,5 +1,4 @@
-import { useState } from "react";
-import TagSelection from "../components/home/tagSelection";
+import { useRef, useState } from "react";
 import { useForm } from "@mantine/form";
 import BookForm from "../components/add/BookForm";
 import GameForm from "../components/add/GameForm";
@@ -7,7 +6,6 @@ import MovieForm from "../components/add/MovieForm";
 import DefaultForm from "../components/add/DefaultForm";
 import SplitForm from "../components/add/SplitForm";
 import { Button } from "@mantine/core";
-import useWindowDimensions from "../utils/useWindowDimensions";
 import AddSteps from "../components/add/AddSteps";
 import { useRouter } from "next/router";
 
@@ -15,7 +13,7 @@ export default function Add() {
     const router = useRouter();
     const [type, setType] = useState<string | null>(null);
     const [active, setActive] = useState<number>(0);
-    const { height } = useWindowDimensions();
+    const defaultFormRef = useRef();
 
     // form definitions
     const defaultForm = useForm({
@@ -25,11 +23,38 @@ export default function Add() {
             // date input
             publishDate: "",
             // switcher
-            category: "",
+            category: [],
             // toggle
             available: true,
             // toggle
             condition: 0,
+        },
+        validate: {
+            name: (value) => {
+                if (!value) {
+                    return "Name is required";
+                }
+            },
+            description: (value) => {
+                if (!value) {
+                    return "Description is required";
+                }
+            },
+            publishDate: (value) => {
+                if (!value) {
+                    return "Publish date is required";
+                }
+            },
+            category: (value) => {
+                if (!value) {
+                    return "Category is required";
+                }
+            },
+            condition: (value) => {
+                if (!value) {
+                    return "Condition is required";
+                }
+            },
         },
     });
     const bookForm = useForm({
@@ -74,7 +99,7 @@ export default function Add() {
 
     const formToRender = () => {
         if (type === "Books") {
-            return <BookForm form={bookForm} handleSubmit={() => {}} />;
+            return <BookForm form={bookForm} />;
         } else if (type === "Games") {
             return <GameForm form={gameForm} />;
         } else if (type === "Movies") {
@@ -94,8 +119,8 @@ export default function Add() {
             </div>
             <div className={"mt-10 pb-4"}>
                 {active === 0 && (
-                    <SplitForm name={"Default"} className={"animate-fade"}>
-                        <DefaultForm form={defaultForm} />
+                    <SplitForm name={"General"} className={"animate-fade"}>
+                        <DefaultForm form={defaultForm} formRef={defaultFormRef} />
                     </SplitForm>
                 )}
                 {active === 1 && (
@@ -110,14 +135,20 @@ export default function Add() {
                     variant={"outline"}
                     className={"ml-4 mb-4 absolute bottom-1/4"}
                     size={"md"}
+                    type={"submit"}
                     onClick={() => {
                         if (active === 0) {
+                            const result = defaultForm.validate();
+                            if (result.hasErrors) return;
                             setActive(1);
                         } else {
+                            const result = defaultForm.validate();
+                            if (result.hasErrors) return;
                             setActive(2);
+                            // if successful timeout and redirect
                             setTimeout(() => {
-                                setActive(0);
-                            }, 1000);
+                                router.push("/");
+                            }, 600);
                         }
                     }}
                 >

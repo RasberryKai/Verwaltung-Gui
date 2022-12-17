@@ -5,21 +5,43 @@ import { useState } from "react";
 
 interface DefaultFormProps {
     form: any;
+    formRef: any;
 }
 
 export default function DefaultForm(props: DefaultFormProps) {
     const theme = useMantineTheme();
     const [checked, setChecked] = useState<boolean>(true);
-    const handleSubmit = (values: any) => {};
+    const handleSubmit = (values: any) => {
+        console.log(values);
+    };
 
     return (
         <form
             className={"grid grid-rows-6 gap-4"}
+            ref={props.formRef}
             onSubmit={props.form.onSubmit((values: any) => handleSubmit(values))}
         >
-            <TextInput size={"md"} withAsterisk label={"Name"} placeholder={"Herr der Ringe"} />
-            <TextInput size={"md"} withAsterisk label={"Description"} placeholder={"Ein Buch über Ringe"} />
-            <DatePicker size={"md"} label={"Publish Date"} withAsterisk placeholder={"20.01.2004"} />
+            <TextInput
+                size={"md"}
+                withAsterisk
+                label={"Name"}
+                placeholder={"Herr der Ringe"}
+                {...props.form.getInputProps("name")}
+            />
+            <TextInput
+                size={"md"}
+                withAsterisk
+                label={"Description"}
+                placeholder={"Ein Buch über Ringe"}
+                {...props.form.getInputProps("description")}
+            />
+            <DatePicker
+                size={"md"}
+                label={"Publish Date"}
+                withAsterisk
+                placeholder={"20.01.2004"}
+                {...props.form.getInputProps("publishDate")}
+            />
             <MultiSelect
                 size={"md"}
                 label={"Category"}
@@ -27,9 +49,17 @@ export default function DefaultForm(props: DefaultFormProps) {
                 searchable
                 placeholder={"Fantasy"}
                 data={["Fantasy", "Sci-Fi"]}
+                {...props.form.getInputProps("category")}
             />
             {/* Condition */}
-            <Select size={"md"} withAsterisk label={"Condition"} placeholder={"new"} data={[]} />
+            <Select
+                size={"md"}
+                withAsterisk
+                label={"Condition"}
+                placeholder={"new"}
+                data={[]}
+                {...props.form.getInputProps("condition")}
+            />
             <Switch
                 checked={checked}
                 onChange={(event) => setChecked(event.currentTarget.checked)}
@@ -43,6 +73,7 @@ export default function DefaultForm(props: DefaultFormProps) {
                         <IconX size={12} color={theme.colors.red[theme.fn.primaryShade()]} stroke={3} />
                     )
                 }
+                {...props.form.getInputProps("available")}
             />
         </form>
     );
