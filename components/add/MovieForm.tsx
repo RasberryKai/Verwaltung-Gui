@@ -3,7 +3,7 @@ import { Chip, NumberInput, Select, TextInput } from "@mantine/core";
 export default function MovieForm(props: { form: any }) {
     const { form } = props;
     return (
-        <form className={"grid grid-rows-3"}>
+        <form className={"grid grid-rows-3 animate-fade"}>
             <NumberInput
                 label={"Duration"}
                 withAsterisk

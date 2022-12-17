@@ -4,7 +4,7 @@ export default function GameForm(props: { form: any }) {
     const { form } = props;
 
     return (
-        <form className={"grid grid-rows-4 gap-4"}>
+        <form className={"grid grid-rows-4 gap-4 animate-fade"}>
             <TextInput
                 label={"Publisher"}
                 withAsterisk

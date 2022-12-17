@@ -165,6 +165,33 @@ export default function Add() {
         }
     };
 
+    const handleSubmit = () => {
+        if (active === 0) {
+            const result = defaultForm.validate();
+            if (result.hasErrors) return;
+            setActive(1);
+        } else {
+            const result = getFormErrors();
+            if (result.hasErrors) return;
+            setActive(2);
+            // if successful timeout and redirect
+            switch (type) {
+                case "Books":
+                    // create book
+                    break;
+                case "Games":
+                    // create game
+                    break;
+                case "Movies":
+                    // create movie
+                    break;
+            }
+            setTimeout(() => {
+                router.push("/");
+            }, 600);
+        }
+    };
+
     return (
         <div className={"w-full h-full pl-10 pr-10 overflow-scroll"}>
             <div className={"flex flex-row justify-end"}>
@@ -207,22 +234,7 @@ export default function Add() {
                     className={"ml-4 mb-4 absolute bottom-16"}
                     size={"md"}
                     type={"submit"}
-                    onClick={() => {
-                        if (active === 0) {
-                            const result = defaultForm.validate();
-                            if (result.hasErrors) return;
-                            setActive(1);
-                        } else {
-                            const result = getFormErrors();
-                            if (result.hasErrors) return;
-                            setActive(2);
-                            // if successful timeout and redirect
-                            // TODO: Create item in database
-                            setTimeout(() => {
-                                router.push("/");
-                            }, 600);
-                        }
-                    }}
+                    onClick={handleSubmit}
                 >
                     {active === 0 ? "Next" : "Finish"}
                 </Button>
