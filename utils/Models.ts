@@ -3,7 +3,7 @@ export interface Medium {
     name: string;
     description: string;
     publishDate: string;
-    category: string;
+    category: string[];
     available: boolean;
     condition: number;
 }

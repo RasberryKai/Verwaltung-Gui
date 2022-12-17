@@ -66,6 +66,21 @@ export default function Add() {
             pages: null,
         },
         validate: {
+            publisher: (value) => {
+                if (!value) {
+                    return "Publisher is required";
+                }
+            },
+            author: (value) => {
+                if (!value) {
+                    return "Author is required";
+                }
+            },
+            isbn: (value) => {
+                if (!value) {
+                    return "ISBN is required";
+                }
+            },
             pages: (value) => {
                 if (!value || value <= 0) return "Pages must be greater than 0";
             },
@@ -80,6 +95,16 @@ export default function Add() {
             ageRating: 0,
         },
         validate: {
+            publisher: (value) => {
+                if (!value) {
+                    return "Publisher is required";
+                }
+            },
+            platform: (value) => {
+                if (!value) {
+                    return "Platform is required";
+                }
+            },
             ageRating: (value) => {
                 if (value < 0) return "Age rating must be greater than 0";
                 if (value !== 6 && value !== 12 && value !== 16 && value !== 18)
@@ -105,6 +130,19 @@ export default function Add() {
             return <GameForm form={gameForm} />;
         } else if (type === "Movies") {
             return <MovieForm form={movieForm} />;
+        }
+    };
+
+    const getFormErrors = () => {
+        switch (type) {
+            case "Books":
+                return bookForm.validate();
+            case "Games":
+                return gameForm.validate();
+            case "Movies":
+                return movieForm.validate();
+            default:
+                return defaultForm.validate();
         }
     };
 
@@ -141,6 +179,7 @@ export default function Add() {
                         </div>
                     </SplitForm>
                 )}
+                {/* TODO: Add completed Checkmark or something */}
             </div>
             <div className={"flex flex-row justify-end mt-4"}>
                 <Button
@@ -155,7 +194,7 @@ export default function Add() {
                             if (result.hasErrors) return;
                             setActive(1);
                         } else {
-                            const result = defaultForm.validate();
+                            const result = getFormErrors();
                             if (result.hasErrors) return;
                             setActive(2);
                             // if successful timeout and redirect
