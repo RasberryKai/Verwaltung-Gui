@@ -115,7 +115,7 @@ export default function Add() {
     const movieForm = useForm({
         initialValues: {
             // numberInput
-            duration: 0,
+            duration: null,
             // toggle
             ageRating: 0,
             // toggle
@@ -124,8 +124,7 @@ export default function Add() {
         },
         validate: {
             duration: (value) => {
-                if (value < 0) return "Duration must be greater than 0";
-                console.log(JSON.stringify(value));
+                if (!value || value < 0) return "Duration must be greater than 0";
             },
             ageRating: (value) => {
                 if (value < 0) return "Age rating must be greater than 0";
@@ -179,7 +178,7 @@ export default function Add() {
                         <DefaultForm form={defaultForm} formRef={defaultFormRef} />
                     </SplitForm>
                 )}
-                {active === 1 && (
+                {active >= 1 && (
                     <SplitForm name={"Specific"}>
                         <div className={"animate-fade"}>
                             <Select
@@ -205,7 +204,7 @@ export default function Add() {
                 <Button
                     color={"orange"}
                     variant={"outline"}
-                    className={"ml-4 mb-4 absolute bottom-1/4"}
+                    className={"ml-4 mb-4 absolute bottom-16"}
                     size={"md"}
                     type={"submit"}
                     onClick={() => {
