@@ -1,4 +1,3 @@
-import { TimeInput } from "@mantine/dates";
 import { Chip, NumberInput, Select, TextInput } from "@mantine/core";
 
 export default function MovieForm(props: { form: any }) {
