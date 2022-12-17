@@ -35,13 +35,7 @@ export default function DefaultForm(props: DefaultFormProps) {
                 placeholder={"Ein Buch über Ringe"}
                 {...props.form.getInputProps("description")}
             />
-            <DatePicker
-                size={"md"}
-                label={"Publish Date"}
-                withAsterisk
-                placeholder={"20.01.2004"}
-                {...props.form.getInputProps("publishDate")}
-            />
+            <DatePicker size={"md"} label={"Publish Date"} withAsterisk {...props.form.getInputProps("publishDate")} />
             <MultiSelect
                 size={"md"}
                 label={"Category"}
@@ -56,7 +50,6 @@ export default function DefaultForm(props: DefaultFormProps) {
                 size={"md"}
                 withAsterisk
                 label={"Condition"}
-                placeholder={"new"}
                 data={["New", "Good", "Used", "Bad"]}
                 {...props.form.getInputProps("condition")}
             />
