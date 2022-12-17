@@ -57,7 +57,7 @@ export default function DefaultForm(props: DefaultFormProps) {
                 withAsterisk
                 label={"Condition"}
                 placeholder={"new"}
-                data={[]}
+                data={["New", "Good", "Used", "Bad"]}
                 {...props.form.getInputProps("condition")}
             />
             <Switch

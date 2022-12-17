@@ -46,7 +46,7 @@ export default function Add() {
                 }
             },
             category: (value) => {
-                if (!value) {
+                if (value.length === 0) {
                     return "Category is required";
                 }
             },
