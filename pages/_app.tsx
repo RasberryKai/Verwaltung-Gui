@@ -3,8 +3,13 @@ import type { AppProps } from "next/app";
 import Navbar from "../components/navbar";
 import { MantineProvider } from "@mantine/core";
 import AlignMid from "../components/common/alignMid";
+import { useEffect } from "react";
 
 export default function App({ Component, pageProps }: AppProps) {
+    useEffect(() => {
+        document.body.style.overflow = "hidden";
+    }, []);
+
     return (
         <MantineProvider
             theme={{

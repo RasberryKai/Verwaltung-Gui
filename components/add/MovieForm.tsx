@@ -1,16 +1,7 @@
 import { useForm } from "@mantine/form";
 
-export default function MovieForm() {
-    const form = useForm({
-        initialValues: {
-            // numberInput
-            duration: 0,
-            // toggle
-            ageRating: 0,
-            // toggle
-            blockbuster: false,
-        },
-    });
+export default function MovieForm(props: { form: any }) {
+    const { form } = props;
     return (
         <div>
             <p className={"text-orange"}>MovieForm</p>
