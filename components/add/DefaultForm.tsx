@@ -1,7 +1,6 @@
 import { MultiSelect, Select, Switch, TextInput, useMantineTheme } from "@mantine/core";
 import { DatePicker } from "@mantine/dates";
 import { IconCheck, IconX } from "@tabler/icons";
-import { useState } from "react";
 
 interface DefaultFormProps {
     form: any;
@@ -10,7 +9,6 @@ interface DefaultFormProps {
 
 export default function DefaultForm(props: DefaultFormProps) {
     const theme = useMantineTheme();
-    const [checked, setChecked] = useState<boolean>(true);
     const handleSubmit = (values: any) => {
         console.log(values);
     };
@@ -54,13 +52,13 @@ export default function DefaultForm(props: DefaultFormProps) {
                 {...props.form.getInputProps("condition")}
             />
             <Switch
-                checked={checked}
-                onChange={(event) => setChecked(event.currentTarget.checked)}
+                checked={props.form.values.available}
+                onChange={() => props.form.setValues(props.form.setValues({ available: !props.form.values.available }))}
                 color="teal"
                 size="md"
                 label="Available"
                 thumbIcon={
-                    checked ? (
+                    props.form.values.available ? (
                         <IconCheck size={12} color={theme.colors.teal[theme.fn.primaryShade()]} stroke={3} />
                     ) : (
                         <IconX size={12} color={theme.colors.red[theme.fn.primaryShade()]} stroke={3} />

@@ -5,7 +5,7 @@ import GameForm from "../components/add/GameForm";
 import MovieForm from "../components/add/MovieForm";
 import DefaultForm from "../components/add/DefaultForm";
 import SplitForm from "../components/add/SplitForm";
-import { Button } from "@mantine/core";
+import { Button, Select } from "@mantine/core";
 import AddSteps from "../components/add/AddSteps";
 import { useRouter } from "next/router";
 
@@ -57,16 +57,17 @@ export default function Add() {
             },
         },
     });
+
     const bookForm = useForm({
         initialValues: {
             publisher: "",
             author: "",
             isbn: "",
-            pages: 0,
+            pages: null,
         },
         validate: {
             pages: (value) => {
-                if (value <= 0) return "Pages must be greater than 0";
+                if (!value || value <= 0) return "Pages must be greater than 0";
             },
         },
     });
@@ -104,9 +105,6 @@ export default function Add() {
             return <GameForm form={gameForm} />;
         } else if (type === "Movies") {
             return <MovieForm form={movieForm} />;
-        } else {
-            // TODO: Add Select for type info
-            return <div className={"text-orange"}>Nothing</div>;
         }
     };
 
@@ -124,8 +122,23 @@ export default function Add() {
                     </SplitForm>
                 )}
                 {active === 1 && (
-                    <SplitForm name={"Specific"} className={"animate-fade"}>
-                        {formToRender()}
+                    <SplitForm name={"Specific"}>
+                        <div className={"animate-fade"}>
+                            <Select
+                                data={[
+                                    { label: "Book", value: "Books" },
+                                    { label: "Game", value: "Games" },
+                                    { label: "Movie", value: "Movies" },
+                                ]}
+                                onChange={(value) => setType(value)}
+                                className={"mb-6"}
+                                size={"md"}
+                                label={"Type"}
+                                withAsterisk
+                                placeholder={"Book, Game or Movie?"}
+                            />
+                            {formToRender()}
+                        </div>
                     </SplitForm>
                 )}
             </div>
