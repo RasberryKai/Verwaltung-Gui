@@ -133,9 +133,3 @@ export default function Card(props: CardProps) {
         </div>
     );
 }
-/*
-<p className={`text-base ${getConditionColor(data.condition)}`}>{getCondition(data.condition)}</p>
-<p className={data.available ? "text-green" : "text-red"}>
-                        {data.available ? "Available" : "Borrowed"}
-                    </p>
- */
