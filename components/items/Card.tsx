@@ -43,7 +43,7 @@ export default function Card(props: CardProps) {
     const router = useRouter();
 
     return (
-        <button className={`w-full h-18 ${props.className}`} onClick={() => setOpen((open) => !open)}>
+        <button className={`w-full h-18 ${props.className}`}>
             <div className={"w-full h-full rounded-lg flex flex-col justify-between p-2"}>
                 <div className={"flex flex-row justify-between items-center"}>
                     <p className={"text-white text-2xl font-bold"}>{data.name}</p>
