@@ -1,12 +1,7 @@
 import { Client, Entity, Schema } from "redis-om";
 
 const client = new Client();
-
-async function connect() {
-    if (!client.isOpen()) {
-        await client.open(process.env.REDIS_URL);
-    }
-}
+client.open(process.env.REDIS_URL);
 
 class Movie extends Entity {}
 let movieSchema = new Schema(
@@ -62,7 +57,6 @@ let gameSchema = new Schema(Game, {
 });
 
 export async function createMovie(data: any) {
-    await connect();
     const repository = client.fetchRepository(movieSchema);
     await repository.createIndex();
 
@@ -71,7 +65,6 @@ export async function createMovie(data: any) {
 }
 
 export async function createBook(data: any) {
-    await connect();
     const repository = client.fetchRepository(bookSchema);
     await repository.createIndex();
 
@@ -80,7 +73,6 @@ export async function createBook(data: any) {
 }
 
 export async function createGame(data: any) {
-    await connect();
     const repository = client.fetchRepository(gameSchema);
     await repository.createIndex();
 
@@ -89,7 +81,6 @@ export async function createGame(data: any) {
 }
 
 export async function getMovies() {
-    await connect();
     const repository = client.fetchRepository(movieSchema);
     await repository.createIndex();
 
@@ -97,7 +88,6 @@ export async function getMovies() {
 }
 
 export async function getBooks() {
-    await connect();
     const repository = client.fetchRepository(bookSchema);
     await repository.createIndex();
 
@@ -105,7 +95,6 @@ export async function getBooks() {
 }
 
 export async function getGames() {
-    await connect();
     const repository = client.fetchRepository(gameSchema);
     await repository.createIndex();
 
