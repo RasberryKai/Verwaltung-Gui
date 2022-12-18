@@ -1,5 +1,5 @@
-import Tag from "./tag";
-import { TagDrillingProps } from "./interactionRow";
+import Tag from "./Tag";
+import { TagDrillingProps } from "./InteractionRow";
 
 interface TagSelectionProps extends TagDrillingProps {
     className?: string;

@@ -1,10 +1,10 @@
-import { TagDrillingProps } from "../home/interactionRow";
+import { TagDrillingProps } from "../home/InteractionRow";
 import { fetcher } from "../../lib/Axios";
 import useSWR from "swr";
-import Card from "./card";
-import LoadError from "./error";
+import LoadError from "./Error";
 import { Medium } from "../../utils/Models";
 import CircleLoad from "../loaders/CircleLoad";
+import ExpandableCard from "./ExpandableCard";
 
 interface ItemDisplayProps extends TagDrillingProps {
     className?: string;
@@ -22,7 +22,7 @@ export default function ItemDisplay(props: ItemDisplayProps) {
                 if (!props.filter || props.filter === "Movies")
                     return (
                         <>
-                            <Card
+                            <ExpandableCard
                                 key={item.id}
                                 medium={{
                                     id: item.id,
@@ -42,7 +42,7 @@ export default function ItemDisplay(props: ItemDisplayProps) {
                 if (!props.filter || props.filter === "Games")
                     return (
                         <>
-                            <Card
+                            <ExpandableCard
                                 key={item.id}
                                 medium={{
                                     id: item.id,
@@ -62,7 +62,7 @@ export default function ItemDisplay(props: ItemDisplayProps) {
                 if (!props.filter || props.filter === "Books")
                     return (
                         <>
-                            <Card
+                            <ExpandableCard
                                 key={item.id}
                                 medium={{
                                     id: item.id,

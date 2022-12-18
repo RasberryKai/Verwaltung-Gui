@@ -1,4 +1,4 @@
-import InteractionRow from "../components/home/interactionRow";
+import InteractionRow from "../components/home/InteractionRow";
 import { useState } from "react";
 import ItemDisplay from "../components/items/itemDisplay";
 import ItemCanvas from "../components/items/ItemCanvas";
