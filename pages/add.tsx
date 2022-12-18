@@ -9,7 +9,7 @@ import { Button, Select } from "@mantine/core";
 import AddSteps from "../components/add/AddSteps";
 import { useRouter } from "next/router";
 import { showNotification } from "@mantine/notifications";
-import axios from "axios";
+import { postBook, postGame, postMovie } from "../api/Creation";
 
 export default function Add() {
     const router = useRouter();
@@ -53,7 +53,7 @@ export default function Add() {
                 }
             },
             condition: (value) => {
-                if (!value) {
+                if (value === -1) {
                     return "Condition is required";
                 }
             },
@@ -84,7 +84,8 @@ export default function Add() {
                 }
             },
             pages: (value) => {
-                if (!value || value <= 0) return "Pages must be greater than 0";
+                if (!value) return "Pages is required";
+                if (value <= 0) return "Pages must be greater than 0";
             },
         },
     });
@@ -126,7 +127,8 @@ export default function Add() {
         },
         validate: {
             duration: (value) => {
-                if (!value || value < 0) return "Duration must be greater than 0";
+                if (!value) return "Duration is required";
+                if (value < 0) return "Duration must be greater than 0";
             },
             ageRating: (value) => {
                 if (value < 0) return "Age rating must be greater than 0";
@@ -167,58 +169,126 @@ export default function Add() {
         }
     };
 
+    const createBook = () => {
+        const { name, description, publishDate, category, available, condition } = defaultForm.values;
+        const { publisher, author, isbn, pages } = bookForm.values;
+        postBook({
+            name: name,
+            description: description,
+            publishDate: publishDate,
+            category: category,
+            available: available,
+            condition: condition,
+            publisher: publisher,
+            author: author,
+            isbn: isbn,
+            // @ts-ignore
+            pages: pages,
+        })
+            .then(() => {
+                showNotification({
+                    title: "Success",
+                    message: "Book created",
+                    color: "green",
+                });
+            })
+            .catch(() => {
+                showNotification({
+                    title: "Error",
+                    message: "Something went wrong",
+                    color: "red",
+                });
+            })
+            .finally(() => router.push("/"));
+    };
+
+    const createGame = () => {
+        const { name, description, publishDate, category, available, condition } = defaultForm.values;
+        const { publisher, platform, ageRating } = gameForm.values;
+        postGame({
+            name,
+            description,
+            publishDate,
+            category,
+            available,
+            condition,
+            publisher,
+            platform,
+            ageRating,
+        })
+            .then(() => {
+                showNotification({
+                    title: "Success",
+                    message: "Game created",
+                    color: "green",
+                });
+            })
+            .catch(() => {
+                showNotification({
+                    title: "Error",
+                    message: "Something went wrong",
+                    color: "red",
+                });
+            })
+            .finally(() => router.push("/"));
+    };
+
+    const createMovie = () => {
+        const { name, description, publishDate, category, available, condition } = defaultForm.values;
+        const { duration, blockbuster, regisseur, ageRating } = movieForm.values;
+        postMovie({
+            name,
+            description,
+            publishDate,
+            category,
+            available,
+            condition,
+            // @ts-ignore
+            duration,
+            blockbuster,
+            regisseur,
+            ageRating,
+        })
+            .then(() => {
+                showNotification({
+                    title: "Success",
+                    message: "Movie created",
+                    color: "green",
+                });
+            })
+            .catch(() => {
+                showNotification({
+                    title: "Error",
+                    message: "Something went wrong",
+                    color: "red",
+                });
+            })
+            .finally(() => router.push("/"));
+    };
+
     const handleSubmit = () => {
         if (active === 0) {
             const result = defaultForm.validate();
             if (result.hasErrors) return;
             setActive(1);
-        } else {
-            const result = getFormErrors();
-            if (result.hasErrors) return;
-            setActive(2);
-            // if successful timeout and redirect
-            switch (type) {
-                case "Books":
-                    // create book
-                    const { publisher, author, isbn, pages } = bookForm.values;
-                    const { name, description, publishDate, category, available, condition } = defaultForm.values;
-                    axios
-                        .post("/api/book", {
-                            name,
-                            description,
-                            publishDate,
-                            category,
-                            available,
-                            condition,
-                            publisher,
-                            author,
-                            isbn,
-                            pages,
-                        })
-                        .then(() => {
-                            showNotification({
-                                title: "Success",
-                                message: "Book created",
-                                color: "green",
-                            });
-                            router.push("/");
-                        })
-                        .catch(() => {
-                            showNotification({
-                                title: "Error",
-                                message: "Something went wrong",
-                                color: "red",
-                            });
-                            router.push("/");
-                        });
-                    break;
-                case "Games":
-                    // create game
-                    break;
-                case "Movies":
-                    // create movie
-                    break;
-            }
+            return;
+        }
+        const result = getFormErrors();
+        if (result.hasErrors) return;
+        setActive(2);
+        switch (type) {
+            case "Books":
+                // create book
+                createBook();
+                break;
+            case "Games":
+                // create game
+                createGame();
+                break;
+            case "Movies":
+                // create movie
+                createMovie();
+                break;
         }
     };
 

@@ -49,10 +49,10 @@ export default function DefaultForm(props: DefaultFormProps) {
                 withAsterisk
                 label={"Condition"}
                 data={[
-                    { label: "New", value: 0 },
-                    { label: "Good", value: 1 },
-                    { label: "Used", value: 2 },
-                    { label: "Bad", value: 3 },
+                    { label: "New", value: 1 },
+                    { label: "Good", value: 2 },
+                    { label: "Used", value: 3 },
+                    { label: "Bad", value: 4 },
                 ]}
                 {...props.form.getInputProps("condition")}
             />
