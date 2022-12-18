@@ -42,6 +42,7 @@ export default function DefaultForm(props: DefaultFormProps) {
                 searchable
                 placeholder={"Fantasy"}
                 data={categories}
+                maxSelectedValues={5}
                 {...props.form.getInputProps("category")}
             />
             {/* Condition */}
