@@ -8,6 +8,8 @@ import SplitForm from "../components/add/SplitForm";
 import { Button, Select } from "@mantine/core";
 import AddSteps from "../components/add/AddSteps";
 import { useRouter } from "next/router";
+import { showNotification } from "@mantine/notifications";
+import axios from "axios";
 
 export default function Add() {
     const router = useRouter();
@@ -178,6 +180,37 @@ export default function Add() {
             switch (type) {
                 case "Books":
                     // create book
+                    const { publisher, author, isbn, pages } = bookForm.values;
+                    const { name, description, publishDate, category, available, condition } = defaultForm.values;
+                    axios
+                        .post("/api/book", {
+                            name,
+                            description,
+                            publishDate,
+                            category,
+                            available,
+                            condition,
+                            publisher,
+                            author,
+                            isbn,
+                            pages,
+                        })
+                        .then(() => {
+                            showNotification({
+                                title: "Success",
+                                message: "Book created",
+                                color: "green",
+                            });
+                            router.push("/");
+                        })
+                        .catch(() => {
+                            showNotification({
+                                title: "Error",
+                                message: "Something went wrong",
+                                color: "red",
+                            });
+                            router.push("/");
+                        });
                     break;
                 case "Games":
                     // create game
@@ -186,9 +219,6 @@ export default function Add() {
                     // create movie
                     break;
             }
-            setTimeout(() => {
-                router.push("/");
-            }, 600);
         }
     };
 
