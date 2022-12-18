@@ -127,6 +127,7 @@ export default function Card(props: CardProps) {
                         >
                             Save
                         </Button>
+                        {/* TODO: Add Remove Button */}
                     </div>
                 </div>
             )}
