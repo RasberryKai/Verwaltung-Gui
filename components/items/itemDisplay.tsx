@@ -4,7 +4,7 @@ import useSWR from "swr";
 import LoadError from "./Error";
 import { Medium } from "../../utils/Models";
 import CircleLoad from "../loaders/CircleLoad";
-import ExpandableCard from "./ExpandableCard";
+import Card from "./Card";
 
 interface ItemDisplayProps extends TagDrillingProps {
     className?: string;
@@ -22,7 +22,7 @@ export default function ItemDisplay(props: ItemDisplayProps) {
                 if (!props.filter || props.filter === "Movies")
                     return (
                         <>
-                            <ExpandableCard
+                            <Card
                                 key={item.id}
                                 medium={{
                                     id: item.id,
@@ -42,7 +42,7 @@ export default function ItemDisplay(props: ItemDisplayProps) {
                 if (!props.filter || props.filter === "Games")
                     return (
                         <>
-                            <ExpandableCard
+                            <Card
                                 key={item.id}
                                 medium={{
                                     id: item.id,
@@ -62,7 +62,7 @@ export default function ItemDisplay(props: ItemDisplayProps) {
                 if (!props.filter || props.filter === "Books")
                     return (
                         <>
-                            <ExpandableCard
+                            <Card
                                 key={item.id}
                                 medium={{
                                     id: item.id,
