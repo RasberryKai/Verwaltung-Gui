@@ -1,5 +1,6 @@
 import { Medium } from "../../utils/Models";
 import { useRouter } from "next/router";
+import { Badge } from "@mantine/core";
 
 interface CardProps {
     medium: Medium;
@@ -55,7 +56,16 @@ export default function Card(props: CardProps) {
                     </p>
                 </div>
                 <div className={"flex flex-row justify-between items-center"}>
-                    <p className={"text-white"}>{data.category}</p>
+                    <div className={"flex flex-row"}>
+                        {data.category.map((category, index) => (
+                            <>
+                                <Badge key={index} color="orange" variant="light">
+                                    {category}
+                                </Badge>
+                                <div className={"mr-2"} />
+                            </>
+                        ))}
+                    </div>
                     <p className={`text-base ${getConditionColor(data.condition)}`}>{getCondition(data.condition)}</p>
                 </div>
             </div>
