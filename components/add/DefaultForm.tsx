@@ -1,6 +1,7 @@
 import { MultiSelect, Select, Switch, TextInput, useMantineTheme } from "@mantine/core";
 import { DatePicker } from "@mantine/dates";
 import { IconCheck, IconX } from "@tabler/icons";
+import { categories } from "../../constants/data";
 
 interface DefaultFormProps {
     form: any;
@@ -40,7 +41,7 @@ export default function DefaultForm(props: DefaultFormProps) {
                 withAsterisk
                 searchable
                 placeholder={"Fantasy"}
-                data={["Fantasy", "Sci-Fi"]}
+                data={categories}
                 {...props.form.getInputProps("category")}
             />
             {/* Condition */}
