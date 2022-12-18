@@ -17,7 +17,7 @@ export default function ItemDisplay(props: ItemDisplayProps) {
     if (!data) return <CircleLoad />;
 
     return (
-        <div className={`p-4 ${props.className}`}>
+        <div className={`p-4 animate-fade ${props.className}`}>
             {data.movies.map((item: Medium) => {
                 if (!props.filter || props.filter === "Movies")
                     return (
@@ -33,7 +33,6 @@ export default function ItemDisplay(props: ItemDisplayProps) {
                                     available: item.available,
                                     condition: item.condition,
                                 }}
-                                className={"animate-fade"}
                             />
                             <div className={"mb-2"} />
                         </>
@@ -54,7 +53,6 @@ export default function ItemDisplay(props: ItemDisplayProps) {
                                     available: item.available,
                                     condition: item.condition,
                                 }}
-                                className={"animate-fade"}
                             />
                             <div className={"mb-2"} />
                         </>
@@ -75,7 +73,6 @@ export default function ItemDisplay(props: ItemDisplayProps) {
                                     available: item.available,
                                     condition: item.condition,
                                 }}
-                                className={"animate-fade"}
                             />
                             <div className={"mb-2"} />
                         </>
