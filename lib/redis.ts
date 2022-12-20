@@ -64,6 +64,15 @@ export async function createMovie(data: any) {
     return await repository.save(movie);
 }
 
+export async function updateMovie(id: string, available: boolean, condition: number) {
+    const repository = client.fetchRepository(movieSchema);
+
+    const movie: any = repository.fetch(id);
+    movie.available = available;
+    movie.condition = condition;
+    await repository.save(movie);
+}
+
 export async function createBook(data: any) {
     const repository = client.fetchRepository(bookSchema);
     await repository.createIndex();
@@ -72,12 +81,30 @@ export async function createBook(data: any) {
     return await repository.save(book);
 }
 
+export async function updateBook(id: string, available: boolean, condition: number) {
+    const repository = client.fetchRepository(bookSchema);
+
+    const book: any = await repository.fetch(id);
+    book.available = available;
+    book.condition = condition;
+    await repository.save(book);
+}
+
 export async function createGame(data: any) {
     const repository = client.fetchRepository(gameSchema);
     await repository.createIndex();
 
     const game = repository.createEntity(data);
     return await repository.save(game);
+}
+
+export async function updateGame(id: string, available: boolean, condition: number) {
+    const repository = client.fetchRepository(gameSchema);
+
+    const game: any = await repository.fetch(id);
+    game.available = available;
+    game.condition = condition;
+    await repository.save(game);
 }
 
 export async function getMovies() {
