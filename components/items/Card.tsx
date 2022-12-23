@@ -1,4 +1,4 @@
-import { Medium } from "../../utils/Models";
+import { Medium, MediumType } from "../../utils/Models";
 import { Badge, Button, Divider, Select, Switch, useMantineTheme } from "@mantine/core";
 import { useEffect, useState } from "react";
 import dayjs from "dayjs";
@@ -6,21 +6,25 @@ import SplitText from "../home/SplitText";
 import BigText from "../home/BigText";
 import { IconCheck, IconX } from "@tabler/icons";
 import { showNotification } from "@mantine/notifications";
+import axios from "axios";
 
 export interface CardProps {
     medium: Medium;
+    type: MediumType;
     className?: string;
 }
 
 export default function Card(props: CardProps) {
     const data = props.medium;
     const theme = useMantineTheme();
+    let updated = false;
     const [open, setOpen] = useState<boolean>(false);
     const [available, setAvailable] = useState<boolean>(data.available);
     const [condition, setCondition] = useState<number>(data.condition);
+    const [isLoading, setLoading] = useState<boolean>(false);
 
     useEffect(() => {
-        if (!open) {
+        if (!open && !updated) {
             setAvailable(data.available);
             setCondition(data.condition);
         }
@@ -28,6 +32,47 @@ export default function Card(props: CardProps) {
 
     const handleClick = () => {
         setOpen(!open);
+    };
+
+    const updateItem = async () => {
+        updated = false;
+        setLoading(true);
+        let url = "";
+        switch (props.type) {
+            case MediumType.BOOK:
+                url = "/api/book";
+                break;
+            case MediumType.GAME:
+                url = "/api/game";
+                break;
+            case MediumType.MOVIE:
+                url = "/api/book";
+                break;
+        }
+        try {
+            await axios.patch("http://localhost:3000" + url, {
+                id: data.id,
+                available: available,
+                condition: condition,
+            });
+            showNotification({
+                title: "Successfully updated the Item",
+                message: "",
+                color: "green",
+            });
+            updated = true;
+        } catch (err: any) {
+            showNotification({
+                title: "Error while updating",
+                message: err.message,
+                color: "red",
+            });
+            setLoading(false);
+            return;
+        }
+
+        setOpen(false);
+        setLoading(false);
     };
 
     return (
@@ -39,14 +84,15 @@ export default function Card(props: CardProps) {
                     </div>
                     <div className={"flex flex-row items-center mt-2"}>
                         <div className={"flex flex-row"}>
-                            {data.category.map((category, index) => (
-                                <>
-                                    <Badge key={index} color="orange" variant="light">
-                                        {category}
-                                    </Badge>
-                                    <div className={"mr-2"} />
-                                </>
-                            ))}
+                            {data.category &&
+                                data.category.map((category, index) => (
+                                    <>
+                                        <Badge key={index} color="orange" variant="light">
+                                            {category}
+                                        </Badge>
+                                        <div className={"mr-2"} />
+                                    </>
+                                ))}
                         </div>
                     </div>
                 </div>
@@ -112,18 +158,11 @@ export default function Card(props: CardProps) {
                     </div>
                     <div className={"w-11/12 flex flex-row justify-start"}>
                         <Button
+                            loading={isLoading}
                             className={"mt-4"}
                             variant={"outline"}
                             color={"green"}
-                            onClick={() => {
-                                showNotification({
-                                    title: "Not implemented",
-                                    message: "This feature",
-                                    color: "green",
-                                });
-                                // TODO: Update backend
-                                setOpen(false);
-                            }}
+                            onClick={updateItem}
                         >
                             Save
                         </Button>

@@ -56,3 +56,9 @@ export interface GameWithoutId extends MediumWithoutId {
     platform: string;
     ageRating: number;
 }
+
+export enum MediumType {
+    BOOK,
+    GAME,
+    MOVIE,
+}

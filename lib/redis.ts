@@ -64,13 +64,20 @@ export async function createMovie(data: any) {
     return await repository.save(movie);
 }
 
-export async function updateMovie(id: string, available: boolean, condition: number) {
+export async function getMovie(id: string) {
     const repository = client.fetchRepository(movieSchema);
+    return await repository.fetch(id);
+}
 
-    const movie: any = repository.fetch(id);
-    movie.available = available;
-    movie.condition = condition;
-    await repository.save(movie);
+export async function getMovies() {
+    const repository = client.fetchRepository(movieSchema);
+    await repository.createIndex();
+
+    return repository.search().return.all();
+}
+
+export async function removeMovie(id: string) {
+    await client.fetchRepository(movieSchema).remove(id);
 }
 
 export async function createBook(data: any) {
@@ -81,13 +88,20 @@ export async function createBook(data: any) {
     return await repository.save(book);
 }
 
-export async function updateBook(id: string, available: boolean, condition: number) {
+export async function getBook(id: string) {
     const repository = client.fetchRepository(bookSchema);
+    return await repository.fetch(id);
+}
 
-    const book: any = await repository.fetch(id);
-    book.available = available;
-    book.condition = condition;
-    await repository.save(book);
+export async function getBooks() {
+    const repository = client.fetchRepository(bookSchema);
+    await repository.createIndex();
+
+    return repository.search().return.all();
+}
+
+export async function deleteBook(id: string) {
+    await client.fetchRepository(bookSchema).remove(id);
 }
 
 export async function createGame(data: any) {
@@ -98,27 +112,9 @@ export async function createGame(data: any) {
     return await repository.save(game);
 }
 
-export async function updateGame(id: string, available: boolean, condition: number) {
+export async function getGame(id: string) {
     const repository = client.fetchRepository(gameSchema);
-
-    const game: any = await repository.fetch(id);
-    game.available = available;
-    game.condition = condition;
-    await repository.save(game);
-}
-
-export async function getMovies() {
-    const repository = client.fetchRepository(movieSchema);
-    await repository.createIndex();
-
-    return repository.search().return.all();
-}
-
-export async function getBooks() {
-    const repository = client.fetchRepository(bookSchema);
-    await repository.createIndex();
-
-    return repository.search().return.all();
+    return await repository.fetch(id);
 }
 
 export async function getGames() {
@@ -128,4 +124,6 @@ export async function getGames() {
     return repository.search().return.all();
 }
 
-// TODO create methods for receiving all items
+export async function removeGame(id: string) {
+    await client.fetchRepository(gameSchema).remove(id);
+}

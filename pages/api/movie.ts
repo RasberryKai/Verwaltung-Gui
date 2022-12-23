@@ -1,5 +1,5 @@
 import { NextApiRequest, NextApiResponse } from "next";
-import { createMovie, getMovies, updateMovie } from "../../lib/redis";
+import { createMovie, getMovie, getMovies, removeMovie } from "../../lib/redis";
 
 export default async function handler(req: NextApiRequest, res: NextApiResponse) {
     switch (req.method) {
@@ -9,12 +9,22 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
             res.status(201).json({ id: movieId });
             break;
         case "GET":
+            if (req.query.id) {
+                const movie = await getMovie(req.query.id as string);
+                res.status(200).json({ movie });
+            }
             const movies = await getMovies();
             res.status(200).json({ movies });
             break;
         case "PATCH":
-            const { id, available, condition } = req.body;
-            await updateMovie(id, available, condition);
+            const newMovie = req.body;
+            const id = req.query.id as string;
+            if (!id) {
+                res.status(400).json({ error: "No id provided" });
+            }
+            const movie = (await getMovie(id)).toJSON();
+            await removeMovie(id);
+            await createMovie(Object.assign({}, movie, newMovie));
             res.status(200).json({ result: "success" });
             break;
         default:

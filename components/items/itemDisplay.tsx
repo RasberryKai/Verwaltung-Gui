@@ -2,7 +2,7 @@ import { TagDrillingProps } from "../home/InteractionRow";
 import { fetcher } from "../../lib/Axios";
 import useSWR from "swr";
 import LoadError from "./Error";
-import { Medium } from "../../utils/Models";
+import { Medium, MediumType } from "../../utils/Models";
 import CircleLoad from "../loaders/CircleLoad";
 import Card from "./Card";
 
@@ -33,6 +33,7 @@ export default function ItemDisplay(props: ItemDisplayProps) {
                                     available: item.available,
                                     condition: item.condition,
                                 }}
+                                type={MediumType.MOVIE}
                             />
                             <div className={"mb-2"} />
                         </>
@@ -53,6 +54,7 @@ export default function ItemDisplay(props: ItemDisplayProps) {
                                     available: item.available,
                                     condition: item.condition,
                                 }}
+                                type={MediumType.GAME}
                             />
                             <div className={"mb-2"} />
                         </>
@@ -73,6 +75,7 @@ export default function ItemDisplay(props: ItemDisplayProps) {
                                     available: item.available,
                                     condition: item.condition,
                                 }}
+                                type={MediumType.BOOK}
                             />
                             <div className={"mb-2"} />
                         </>

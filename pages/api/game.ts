@@ -1,4 +1,4 @@
-import { createGame, getGames, updateBook } from "../../lib/redis";
+import { createGame, getGame, getGames, removeGame } from "../../lib/redis";
 import { NextApiRequest, NextApiResponse } from "next";
 
 export default async function handler(req: NextApiRequest, res: NextApiResponse) {
@@ -13,8 +13,14 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
             res.status(200).json({ games });
             break;
         case "PATCH":
-            const { id, available, condition } = req.body;
-            await updateBook(id, available, condition);
+            const newGame = req.body;
+            const id = req.query.id as string;
+            if (!id) {
+                res.status(400).json({ error: "No id provided" });
+            }
+            const game = (await getGame(id)).toJSON();
+            await removeGame(id);
+            await createGame(Object.assign({}, game, newGame));
             res.status(200).json({ result: "success" });
             break;
         default:
