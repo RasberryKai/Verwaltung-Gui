@@ -52,12 +52,11 @@ export default function Card(props: CardProps) {
         }
         url += `?id=${data.id}`;
         try {
-            const response = await axios.patch("http://localhost:3000" + url, {
+            await axios.patch("http://localhost:3000" + url, {
                 id: data.id,
                 available: available,
                 condition: condition,
             });
-            console.log(JSON.stringify(response));
             showNotification({
                 title: "Successfully updated the Item",
                 message: "",

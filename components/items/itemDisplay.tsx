@@ -18,14 +18,14 @@ export default function ItemDisplay(props: ItemDisplayProps) {
 
     return (
         <div className={`p-4 animate-fade ${props.className}`}>
-            {data.movies.map((item: Medium) => {
+            {data.movies.map((item: any) => {
                 if (!props.filter || props.filter === "Movies")
                     return (
                         <>
                             <Card
                                 key={item.id}
                                 medium={{
-                                    id: item.id,
+                                    id: item.entityId,
                                     name: item.name,
                                     description: item.description,
                                     publishDate: item.publishDate,
@@ -39,14 +39,14 @@ export default function ItemDisplay(props: ItemDisplayProps) {
                         </>
                     );
             })}
-            {data.games.map((item: Medium) => {
+            {data.games.map((item: any) => {
                 if (!props.filter || props.filter === "Games")
                     return (
                         <>
                             <Card
                                 key={item.id}
                                 medium={{
-                                    id: item.id,
+                                    id: item.entityId,
                                     name: item.name,
                                     description: item.description,
                                     publishDate: item.publishDate,
@@ -60,14 +60,14 @@ export default function ItemDisplay(props: ItemDisplayProps) {
                         </>
                     );
             })}
-            {data.books.map((item: Medium) => {
+            {data.books.map((item: any) => {
                 if (!props.filter || props.filter === "Books")
                     return (
                         <>
                             <Card
                                 key={item.id}
                                 medium={{
-                                    id: item.id,
+                                    id: item.entityId,
                                     name: item.name,
                                     description: item.description,
                                     publishDate: item.publishDate,
