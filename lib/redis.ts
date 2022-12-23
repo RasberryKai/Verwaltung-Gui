@@ -100,7 +100,7 @@ export async function getBooks() {
     return repository.search().return.all();
 }
 
-export async function deleteBook(id: string) {
+export async function removeBook(id: string) {
     await client.fetchRepository(bookSchema).remove(id);
 }
 

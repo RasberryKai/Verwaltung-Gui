@@ -18,6 +18,7 @@ export default function Card(props: CardProps) {
     const data = props.medium;
     const theme = useMantineTheme();
     const [updated, setUpdated] = useState<boolean>(false);
+    const [deleted, setDeleted] = useState<boolean>(false);
     const [open, setOpen] = useState<boolean>(false);
     const [available, setAvailable] = useState<boolean>(data.available);
     const [condition, setCondition] = useState<number>(data.condition);
@@ -31,12 +32,13 @@ export default function Card(props: CardProps) {
     }, [open]);
 
     if (!data.name) return null;
+    if (deleted) return null;
 
     const handleClick = () => {
         setOpen(!open);
     };
 
-    const updateItem = async () => {
+    const getURL = () => {
         setLoading(true);
         let url = "";
         switch (props.type) {
@@ -50,10 +52,13 @@ export default function Card(props: CardProps) {
                 url = "/api/movie";
                 break;
         }
-        url += `?id=${data.id}`;
+        return url + `?id=${data.id}`;
+    };
+
+    const updateItem = async () => {
+        const url = getURL();
         try {
             await axios.patch("http://localhost:3000" + url, {
-                id: data.id,
                 available: available,
                 condition: condition,
             });
@@ -66,6 +71,30 @@ export default function Card(props: CardProps) {
         } catch (err: any) {
             showNotification({
                 title: "Error while updating",
+                message: err.message,
+                color: "red",
+            });
+            setLoading(false);
+            return;
+        }
+
+        setOpen(false);
+        setLoading(false);
+    };
+
+    const removeItem = async () => {
+        const url = getURL();
+        try {
+            await axios.delete("http://localhost:3000" + url);
+            showNotification({
+                title: "Successfully deleted the item",
+                message: "",
+                color: "green",
+            });
+            setDeleted(true);
+        } catch (err: any) {
+            showNotification({
+                title: "Error while deleting",
                 message: err.message,
                 color: "red",
             });
@@ -167,6 +196,15 @@ export default function Card(props: CardProps) {
                             onClick={updateItem}
                         >
                             Save
+                        </Button>
+                        <Button
+                            loading={isLoading}
+                            className={"mt-4 ml-6"}
+                            variant={"outline"}
+                            color={"red"}
+                            onClick={removeItem}
+                        >
+                            Remove
                         </Button>
                         {/* TODO: Add Remove Button */}
                     </div>

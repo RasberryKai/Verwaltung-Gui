@@ -1,4 +1,4 @@
-import { createBook, deleteBook, getBook, getBooks } from "../../lib/redis";
+import { createBook, removeBook, getBook, getBooks } from "../../lib/redis";
 import { NextApiRequest, NextApiResponse } from "next";
 
 export default async function handler(req: NextApiRequest, res: NextApiResponse) {
@@ -19,8 +19,13 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
                 res.status(400).json({ error: "No id provided" });
             }
             const book = (await getBook(id)).toJSON();
-            await deleteBook(id);
+            await removeBook(id);
             await createBook(Object.assign({}, book, newBook));
+            res.status(200).json({ result: "success" });
+            break;
+        case "DELETE":
+            const delId = req.query.id as string;
+            await removeBook(delId);
             res.status(200).json({ result: "success" });
             break;
         default:

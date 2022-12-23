@@ -27,6 +27,11 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
             await createMovie(Object.assign({}, movie, newMovie));
             res.status(200).json({ result: "success" });
             break;
+        case "DELETE":
+            const delId = req.query.id as string;
+            await removeMovie(delId);
+            res.status(200).json({ result: "success" });
+            break;
         default:
             res.status(405).send("Method not allowed");
             break;

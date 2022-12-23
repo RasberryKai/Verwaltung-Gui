@@ -2,7 +2,7 @@ import { TagDrillingProps } from "../home/InteractionRow";
 import { fetcher } from "../../lib/Axios";
 import useSWR from "swr";
 import LoadError from "./Error";
-import { Medium, MediumType } from "../../utils/Models";
+import { MediumType } from "../../utils/Models";
 import CircleLoad from "../loaders/CircleLoad";
 import Card from "./Card";
 
