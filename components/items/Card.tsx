@@ -17,7 +17,7 @@ export interface CardProps {
 export default function Card(props: CardProps) {
     const data = props.medium;
     const theme = useMantineTheme();
-    let updated = false;
+    const [updated, setUpdated] = useState<boolean>(false);
     const [open, setOpen] = useState<boolean>(false);
     const [available, setAvailable] = useState<boolean>(data.available);
     const [condition, setCondition] = useState<number>(data.condition);
@@ -30,12 +30,13 @@ export default function Card(props: CardProps) {
         }
     }, [open]);
 
+    if (!data.name) return null;
+
     const handleClick = () => {
         setOpen(!open);
     };
 
     const updateItem = async () => {
-        updated = false;
         setLoading(true);
         let url = "";
         switch (props.type) {
@@ -46,21 +47,23 @@ export default function Card(props: CardProps) {
                 url = "/api/game";
                 break;
             case MediumType.MOVIE:
-                url = "/api/book";
+                url = "/api/movie";
                 break;
         }
+        url += `?id=${data.id}`;
         try {
-            await axios.patch("http://localhost:3000" + url, {
+            const response = await axios.patch("http://localhost:3000" + url, {
                 id: data.id,
                 available: available,
                 condition: condition,
             });
+            console.log(JSON.stringify(response));
             showNotification({
                 title: "Successfully updated the Item",
                 message: "",
                 color: "green",
             });
-            updated = true;
+            setUpdated(true);
         } catch (err: any) {
             showNotification({
                 title: "Error while updating",
