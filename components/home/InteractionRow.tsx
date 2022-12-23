@@ -1,6 +1,3 @@
-import { TextInput } from "@mantine/core";
-import { HiMagnifyingGlass } from "react-icons/hi2";
-import { colors } from "../../constants/colors";
 import TagSelection from "./TagSelection";
 
 export interface TagDrillingProps {
