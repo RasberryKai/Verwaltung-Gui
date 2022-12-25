@@ -24,31 +24,16 @@ export default function Navbar(props: any) {
 
     return (
         <div className={"w-screen h-screen flex flex-row"}>
-            <nav
-                className={
-                    "w-1/12 h-screen bg-primary pr-2 pl-2 flex justify-center items-center"
-                }
-            >
-                <div
-                    className={
-                        "h-full w-11/12 flex flex-col justify-around items-center"
-                    }
-                >
+            <nav className={"w-1/12 h-screen bg-primary pr-4 pl-4 flex justify-center items-center"}>
+                <div className={"h-full w-11/12 flex flex-col justify-around items-center"}>
                     <a href={home} onClick={onHomeClick}>
-                        <Image
-                            src={require("../public/home.png")}
-                            alt={"Home"}
-                        />
+                        <Image src={require("../public/home.png")} alt={"Home"} />
                     </a>
                     <a href={add} onClick={onAddClick}>
                         <Image src={require("../public/add.png")} alt={"add"} />
                     </a>
                     <a href={settings} onClick={onSettingsClick}>
-                        <Image
-                            src={require("../public/options.png")}
-                            alt={"settings"}
-                            className={"scale-95"}
-                        />
+                        <Image src={require("../public/options.png")} alt={"settings"} className={"scale-95"} />
                     </a>
                 </div>
             </nav>
